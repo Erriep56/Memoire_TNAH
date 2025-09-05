@@ -30,11 +30,9 @@
 
 
 %RAJOUTEZ ICI VOS PACKAGES
-\usepackage{minted}
-\usepackage{float}
-\usepackage{pgfplotstable}
-\usepackage{longtable}
-\usepackage{booktabs}
+\usepackage{minted} % coloration syntaxique de code source
+\usepackage{float} % pour des images qui s'affichent bien en flottant [H]
+\usepackage{booktabs} % pour des beaux tableaux
 
 % Paramètres pour les blocs de code
 \setminted{
@@ -226,9 +224,11 @@
 
 	\chapter{Résumé}
 \medskip
-	Résumé du mémoire en français. Cette page ne doit pas dépasser une page.\\
+	Ce mémoire s’inscrit dans le cadre du projet IconographIA, mené par l’Institut national d’histoire de l’art en collaboration avec le consortium Huma-Num Pictoria. Ce projet a pour objectif d’indexer les œuvres recensées dans le RETIF (Répertoire des tableaux italiens dans les collections publiques françaises), en mobilisant les technologies relevant de l’intelligence artificielle et de la vision par ordinateur. L’indexation iconographique s’appuie sur le thésaurus Garnier et est destinée à être intégrée dans la plateforme AGORHA.
+    
+    Au cours de cette étude, une réflexion est d'abord conduite sur les enjeux de cette pratique documentaire, en particulier pour la description des œuvres picturales, ainsi que sur ses instruments et son rôle dans l’exploration des bases de données. Les expérimentations menées pour automatiser cette tâche sont ensuite exposées, en détaillant les pistes envisagées, les défis rencontrés et les limites de cette méthode. Enfin, ce mémoire expose des approches alternatives à l'automatisation du processus, s'appuyant sur la vision par ordinateur pour faciliter le travail de l’indexeur ou pour repenser l'exploration au sein des bases de données.\\
 	
-	\textbf{Mots-clés:} une liste de mots-clés~; séparés par des points-virgules.
+	\textbf{Mots-clés:} intelligence artificielle ; vision par ordinateur ; histoire de l'art, indexation iconographique ; thésaurus ; iconographie ; peinture italienne ; RETIF
 	
 	\textbf{Informations bibliographiques:} {\Auteur}, \textit{\TitreMemoire. \SousTitreMemoire}, mémoire de master \enquote{Technologies numériques appliquées à l'histoire}, dir. Ségolène Albouy, École nationale des chartes, 2025.
 	
@@ -250,8 +250,6 @@
 
 %%%%%%%%%%%%%%%%%Le corps du mémoire
 	\mainmatter
-%Trier par dossiers si besoin (front, main,annexes,), se crérer un docuemnt .tex par structure (section ou chapter selon la taille et la pertinence) Exemple de chemin à partir du dossier où se trouve le document maître: ./dossierA/fichier.tex
-
 	
 
 	\part{L’indexation iconographique des œuvres patrimoniales à l’ère du numérique}
@@ -305,14 +303,21 @@
 
 \input{annexes/annexes1.tex}
 
-
-\chapter[Visualisation du corpus]{Visualisation du corpus dans Pixplot et dans Panoptic}
+\chapter{Le thésaurus Garnier dans AGORHA}
 
 \input{annexes/annexes2.tex}
 
-\input{annexes/codeGarnier.tex}
+\chapter{Les modèles d'intelligence artificielles}
 
 \input{annexes/annexes3.tex}
+
+\chapter{Pixplot et Panoptic}
+
+\input{annexes/annexes4.tex}
+
+\chapter{Application Streamlit intégrant CLIP}
+
+\input{annexes/annexes5.tex}
 
 \newpage{\pagestyle{empty}\cleardoublepage}
 
