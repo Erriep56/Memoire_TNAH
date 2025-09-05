@@ -1,0 +1,328 @@
+%Document vide aux normes de l'École nationale des Chartes
+%crée par J.B. Camps
+%Dernières modifications E. Rouquette (03/2025)
+
+%%%%%%%%%%%%%%%%%%%%%% PRÉAMBULE
+
+
+%%%%%%%%%%%%%% partie obligatoire du préambule
+\documentclass[12pt,twoside]{book}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{polyglossia}
+\setmainlanguage{french}%indiquer la langue principale du document
+%\setotherlanguage{} %indiquer les autres langues utilisée
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES UTILISÉS
+
+\usepackage{csquotes} % les guillemets français
+\usepackage{lettrine} %faire une lettrine (pas obligatoire)
+
+\usepackage[style=biblatex-enc/enc,sorting=nyt,maxbibnames=10]{biblatex}%charger le style de l'EnC (téléchargeable ici https://ctan.org/pkg/biblatex-enc)
+\addbibresource{bibliographie.bib} %le fichier bibliograhique. Exemple de chemin à partir du dossier où se trouve le document maître:Exemple ./dossierA/fichier.bib
+%\defbibheading{}{\subsection*{}} Si l'on veut changer le titre de la/les bibliographie(s)
+
+%%%Faire un ou plusieurs index
+
+%\usepackage{imakeidx} %pour faire un ou plusieurs index
+%\makeindex %commande pour générer l'index
+
+
+%RAJOUTEZ ICI VOS PACKAGES
+\usepackage{minted}
+\usepackage{float}
+\usepackage{pgfplotstable}
+\usepackage{longtable}
+\usepackage{booktabs}
+
+% Paramètres pour les blocs de code
+\setminted{
+    frame=lines,       % cadre autour du code
+    linenos,           % numéroter les lignes
+    fontsize=\small,   % taille de la police
+    breaklines=true,   % couper les lignes trop longues
+    breakautoindent=true, % respecter l'indentation après un saut
+    breakanywhere=true % autoriser le saut n'importe où si nécessaire
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONFIGURATION DE MISE EN PAGE
+
+%%%%%% Les compteurs (sections, subsections, etc)
+
+
+%%%%%% Les compteurs (sections, subsections, etc)
+\renewcommand{\thesection}{\Roman{section}.}%On ne fait apparaître que le numéro de la section
+\renewcommand{\thesubsection}{\arabic{subsection}.}%subsection en chiffres arabes
+\renewcommand{\thesubsubsection}{\alph{subsubsection}.}%subsubsection en lettres minuscules
+%Si l'on veut faire apparaître les subsubsection dans le table des matières (à commenter sinon)
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}  % La subsubsection (profondeur=3 dans la table des matières) apparait numérotée dans la TdM
+
+
+
+%%%%%  Configurer le document selon les normes de l'école
+
+\usepackage[margin=2.5cm]{geometry} %marges
+\usepackage{setspace} % espacement qui permet ensuite de définir un interligne
+\onehalfspacing % interligne de 1.5
+\setlength\parindent{1cm} % indentation des paragraphes à 1 cm
+
+
+%%%%% Mise en forme des headers (haut de page)
+
+\usepackage{fancyhdr} %package utilisé pour modifier les headers
+\pagestyle{fancy} %utiliser ses propres choix de mise en page et non ceux par défaut du package
+
+\setlength\headheight{16pt}%la hauteur des headers
+
+%%la façon dont les sections apparaissent dans les en-tête:
+
+\renewcommand{\sectionmark}[1]{\markright{\small\textit{\thesection~\  #1}}}%Faire apparaître dans les headers les sections en  petit et en italiques
+%\renewcommand{\sectionmark}[1]{}%Commenter la lign précédetne et mettre celle-ci pour ne pas avoir le titre des sections dans le header
+
+%% réglages propres à frontmatter
+
+\appto\frontmatter{\pagestyle{fancy}%
+	\renewcommand{\chaptermark}[1]{\markboth{\small\textit{#1}}{}}% ne pas faire apparaître de <<numéro>> de chapitre dans les chapitres non numérotés (front: l'introduction, els remerciement, etc)
+}
+
+%% réglages propres à mainmatter
+
+\appto\mainmatter{
+\renewcommand{\chaptermark}[1]{\markboth{\small\chaptername~\thechapter~--\ \textit{#1}}{}}%faire apparaître dans les headers les sections en  petit et en italiques
+%\renewcommand{\chaptermark}[1]{}%Commenter la ligne précédente et mettre celle-ci pour ne pas avoir le titre des chapitres  dans le header
+}
+
+%% réglages propres aux annexes
+
+\appto\appendix{
+	\renewcommand{\chaptermark}[1]{\markboth{\small~Annexe \thechapter~--\ \textit{#1}}{}}%faire apparaître dans les headers le nom des annexes
+	%\renewcommand{\chaptermark}[1]{}%Commenter la ligne précédente et mettre celle-ci pour ne pas avoir le titre des chapitres  dans le header
+}
+
+
+
+
+%indiquer des règles d'hyphénation pour des mots précis si besoin
+%\begin{hyphenrules}{french}
+%	\hyphenation{}
+%\end{hyphenrules}
+
+
+%%%%%%% Package hyperref
+
+% A mettre après les autres appels de packages car redéfinit certaines commandes).
+
+\usepackage[xetex, colorlinks=false, breaklinks=true, pdfusetitle, pdfsubject ={Mémoire HN}, pdfkeywords={les mots-clés}]{hyperref} %
+\usepackage[numbered]{bookmark}%va avec hyperref; marche mieux pour les signets. l'option numbered: les signets dans le pdf sont numérotés
+
+% Compléter pdfsubjet et pdfkeywords
+%Explication des options de hyperref (modifiables)
+% hyperindex=false
+% colorlinks=false: pour que le cadre des liens n'apparaisse pas à l'impression
+% breaklinks permet d'avoir des liens allant sur pusieurs lignes
+%pdfusetitle: utiliser \author et \title pour produire le nom et le titre du pdf
+
+
+%avec overleaf, utiliser :
+\hypersetup{
+		pdfauthor = {Pierre Husson},
+		pdftitle = {Indexation iconographique et intelligence artificielle. Expérimentations autour du Répertoire des tableaux italiens dans les collections publiques françaises (RETIF)},
+		pdfsubject = {sujet},
+		pdfkeywords = {Histoire de l'art} {peinture} {intelligence artificielle} {vision par ordinateur}
+	}
+
+%%%%%%%%%%%%%%%%%%%% Package glossaries
+
+%Exception: il faut le charger APRÈS hyperref
+%\usepackage[toc=true]{glossaries}
+%\makeglossaries
+%avec TexStudio: F9 pour compiler le glossaire (s'il y a aussi un index)
+
+%mettre les entrées du glossaire ici ou les mettre dans un fichier à part que l'on appelle ici par \loadglsentries{nom_du_fichier.tex}
+
+%Structure d'une entrée de glossaire
+%\newglossaryentry{}{%
+%	name={},%
+%	description={}
+%}
+
+
+
+%%%%%%%%%%%%%%%%%% DÉFINITION DES COMMANDES ET ENVIRONNMENTS
+
+\newcommand{\PrenomAuteur}{Pierre}
+\newcommand{\NomAuteur}{Husson}
+\newcommand{\Auteur}{\PrenomAuteur\ \NomAuteur}
+\newcommand{\TitreMemoire}{Indexation iconographique et intelligence artificielle}
+\newcommand{\SousTitreMemoire}{Expérimentations autour du Répertoire des tableaux italiens dans les collections publiques françaises (RETIF)}
+
+ %%%%%%%%%%%%%% INFORMATIONS POUR LA PAGE DE TITRE
+ 
+\author{\PrenomAuteur \textsc{\NomAuteur} - M2 TNAH}
+\title{\TitreMemoire}
+
+%%%%%%%%%%%%%%%%%%%%%% DOCUMENT
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			
+			\bigskip
+			
+			\begin{large}				
+				ÉCOLE NATIONALE DES CHARTES\\
+				UNIVERSITÉ PARIS, SCIENCES \& LETTRES
+			\end{large}
+			\begin{center}\rule{2cm}{0.02cm}\end{center}
+			
+			\bigskip
+			\bigskip
+			\bigskip
+			\begin{Large}
+				\textbf{\Auteur}\\
+			\end{Large}
+		%selon le cas
+			\begin{normalsize}
+				\textit{diplômé de master}
+			\end{normalsize}
+			
+			\bigskip
+			\bigskip
+			\bigskip
+			
+			\begin{Huge}
+				\textbf{\MakeUppercase{\TitreMemoire}}\\
+			\end{Huge}
+			\bigskip
+			\bigskip
+			\begin{LARGE}
+				\textbf{\SousTitreMemoire}\\
+			\end{LARGE}
+			
+			\bigskip
+			\bigskip
+			\bigskip
+			\begin{large}
+			\end{large}
+			\vfill
+			
+			\begin{large}
+				Mémoire 
+				pour le diplôme de master \\
+				\enquote{Technologies numériques appliquées à l'histoire} \\
+				\bigskip
+				2025
+			\end{large}
+			
+		\end{center}
+	\end{titlepage}
+
+	\thispagestyle{empty}	
+	\cleardoublepage
+	
+\frontmatter
+
+	\chapter{Résumé}
+\medskip
+	Résumé du mémoire en français. Cette page ne doit pas dépasser une page.\\
+	
+	\textbf{Mots-clés:} une liste de mots-clés~; séparés par des points-virgules.
+	
+	\textbf{Informations bibliographiques:} {\Auteur}, \textit{\TitreMemoire. \SousTitreMemoire}, mémoire de master \enquote{Technologies numériques appliquées à l'histoire}, dir. Ségolène Albouy, École nationale des chartes, 2025.
+	
+		\newpage{\pagestyle{empty}\cleardoublepage}
+	
+	\chapter{Avant-Propos}
+
+    \input{chapitres/avantpropos.tex}
+	\newpage{\pagestyle{empty}\cleardoublepage}
+	
+%%%%%%%%%%%% \bibliographie (selon les normes de l'EnC)
+\printbibliography
+
+	
+\chapter{Introduction}	
+\input{chapitres/introduction}
+
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+%%%%%%%%%%%%%%%%%Le corps du mémoire
+	\mainmatter
+%Trier par dossiers si besoin (front, main,annexes,), se crérer un docuemnt .tex par structure (section ou chapter selon la taille et la pertinence) Exemple de chemin à partir du dossier où se trouve le document maître: ./dossierA/fichier.tex
+
+	
+
+	\part{L’indexation iconographique des œuvres patrimoniales à l’ère du numérique}
+
+\chapter[Indexation : principes et enjeux]{Principes et enjeux de l’indexation iconographique en histoire de l’art}
+\input{chapitres/chapitre1.tex}
+
+\chapter[Les instruments de l'indexation]{Les instruments de l'indexation : vocabulaires contrôlés et systèmes d’indexation}
+\input{chapitres/chapitre2.tex}
+
+\chapter[Indexation et numérique]{L’indexation iconographique à l’épreuve des technologies numériques}
+\input{chapitres/chapitre3.tex}
+
+	\part{Enjeux techniques et méthodologiques de l’automatisation de la description iconographique de peintures}
+
+\chapter[Les données du projet]{Comprendre et exploiter les données du projet}
+\input{chapitres/chapitre4.tex}
+
+\chapter[Expérimentations pour l'automatisation]{Expérimenter les méthodes et proposer un protocole}
+\input{chapitres/chapitre5.tex}
+
+\chapter[Bénéfices et limites de l'automatisation]{Bénéfices et limites de l’automatisation dans un contexte institutionnel}
+\input{chapitres/chapitre6.tex}
+
+	\part{Alternatives à l’automatisation : des outils d'intelligence artificielle au service des pratiques d'indexation iconographiques}
+
+\chapter[Faciliter l'indexation]{Des solutions hybrides pour faciliter l’indexation iconographique plutôt que l’automatiser}
+\input{chapitres/chapitre7.tex}
+
+\chapter[Nouvelles méthodes d'exploration]{Des nouvelles méthodes d’exploration des corpus en histoire de l’art}
+\input{chapitres/chapitre8.tex}
+	
+	
+	\chapter*{Conclusion}
+	\addcontentsline{toc}{chapter}{Conclusion}
+	\input{chapitres/conclusion}
+
+\newpage{\pagestyle{empty}\cleardoublepage}
+	
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%
+
+\appendix %Des appendices: tables figures, etc
+
+\chapter{Le corpus du RETIF}
+
+\input{annexes/annexes1.tex}
+
+
+\chapter[Visualisation du corpus]{Visualisation du corpus dans Pixplot et dans Panoptic}
+
+\input{annexes/annexes2.tex}
+
+\input{annexes/codeGarnier.tex}
+
+\input{annexes/annexes3.tex}
+
+\newpage{\pagestyle{empty}\cleardoublepage}
+
+%%%%%%%%%%%%%%%%%%
+
+\backmatter % glossaire, index, table des figures, table des matières.. (la bibliographie a déjà été appelée)
+
+%\printindex
+%\printglossaries[title=Glossaire]
+%\listoftables
+%\listoffigures
+\tableofcontents
+\end{document}
